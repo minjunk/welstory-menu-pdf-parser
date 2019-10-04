@@ -78,4 +78,13 @@ export interface MenuCellText {
   texts?: MenuText[];
 }
 
+export interface MenuMealData {
+  mealName: string;
+  summary: string;
+  description: string;
+  meals: MenuData[];
+  startDateTime: Date;
+  endDateTime: Date;
+}
+
 export type LineDirection = 'x' | 'y';

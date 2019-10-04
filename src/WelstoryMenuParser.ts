@@ -1,5 +1,5 @@
 import { PDFPage, PDFPagesFills } from 'pdf2json';
-import { sortBy, flattenDeep } from 'lodash';
+import { groupBy, sortBy, flattenDeep } from 'lodash';
 
 import { LINE_TYPE, MENU_REGEXP } from './constants';
 import {
@@ -8,10 +8,10 @@ import {
 } from './utils';
 import {
   MenuCell, MenuDate, MenuMeal, MenuCorner,
-  MenuText, MenuData
+  MenuText, MenuData, MenuMealData
 } from './types/menu';
 
-export { MenuData };
+export { MenuData, MenuMealData };
 
 export default class WelstoryMenuParser {
   private cells: MenuCell[] = [];
@@ -149,5 +149,28 @@ export default class WelstoryMenuParser {
       });
     }
     return this.menus;
+  }
+
+  getMeals(): MenuMealData[] {
+    const group = Object.values(groupBy(this.menus, 'startDateTime')) as Array<MenuData[]>;
+    return group.map(meals => {
+      const mealName = meals[0].meal.text;
+      const cornerName = meals.map(o => {
+        return o.corner.text.indexOf('코너') === 0 ? o.texts[0] : null;
+      }).filter(Boolean).join('/');
+      const summary = cornerName ? `${mealName}(${cornerName})` : mealName;
+      const description = meals.map(meal => {
+        return [meal.corner.text]
+          .concat(meal.texts.map(text => `- ${text}`)).join('\n');
+      }).join('\n\n');
+      return {
+        mealName,
+        summary,
+        description,
+        meals,
+        startDateTime: meals[0].startDateTime,
+        endDateTime: meals[0].endDateTime,
+      };
+    });
   }
 }

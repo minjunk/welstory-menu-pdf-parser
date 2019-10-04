@@ -1,6 +1,6 @@
 import PDFParser, { PDFDataReady } from 'pdf2json';
 import { get } from 'lodash';
-import WelstoryMenuParser, { MenuData } from './WelstoryMenuParser';
+import WelstoryMenuParser, { MenuData, MenuMealData } from './WelstoryMenuParser';
 
 async function readPDfPage(file: Buffer): Promise<PDFDataReady> {
   return new Promise((resolve, reject): void => {
@@ -11,7 +11,7 @@ async function readPDfPage(file: Buffer): Promise<PDFDataReady> {
   });
 }
 
-export async function menuPdfParser(file: Buffer, date?: Date): Promise<MenuData[]> {
+export async function menuPdfParser(file: Buffer, date?: Date): Promise<MenuData[] | MenuMealData[]> {
   const data = await readPDfPage(file);
   const page = get(data, 'formImage.Pages[0]');
   if (!page) {
@@ -19,7 +19,10 @@ export async function menuPdfParser(file: Buffer, date?: Date): Promise<MenuData
   }
 
   const parse = new WelstoryMenuParser(page);
-  return parse.getData(date);
+  if (date) {
+    return parse.getData(date);
+  }
+  return parse.getMeals();
 }
 
 export { WelstoryMenuParser };
