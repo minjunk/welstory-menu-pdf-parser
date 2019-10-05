@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+
+if (fs.existsSync(path.join(__dirname, '../dist/scripts/menuParser.js'))) {
+  require('../dist/scripts/menuParser.js');
+} else {
+  console.log('Use `ts-node/register`');
+  require('ts-node').register({});
+  require('../scripts/menuParser');
+}

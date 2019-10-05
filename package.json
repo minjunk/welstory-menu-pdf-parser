@@ -1,6 +1,7 @@
 {
   "name": "welstory-menu-pdf-parser",
   "version": "1.0.5",
+  "bin": "bin/menu-parser",
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
