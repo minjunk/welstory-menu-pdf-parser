@@ -1,6 +1,6 @@
 {
   "name": "welstory-menu-pdf-parser",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "bin": {
     "menu-parser": "bin/menu-parser"
   },
