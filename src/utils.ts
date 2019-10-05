@@ -3,7 +3,6 @@ import { PDFPageTexts, PDFPagesFill, PDFPagesFills } from 'pdf2json';
 import {
   map, sortBy, groupBy, result,
 } from 'lodash';
-import urldecode from 'urldecode';
 import {
   LINE_TYPE, MENU_REGEXP,
 } from './constants';
@@ -91,7 +90,7 @@ export function prettyTexts(texts: PDFPageTexts): MenuText[] {
   return texts.map((o) => ({
     x: o.sw ? (o.x + o.sw) : o.x,
     y: o.sw ? (o.y + o.sw) : o.y,
-    text: (urldecode(result(o, 'R[0].T')) || '').trim(),
+    text: (decodeURIComponent(result(o, 'R[0].T')) || '').trim(),
   }));
 }
 
