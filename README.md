@@ -1,9 +1,7 @@
 # 웰스토리 메뉴 PDF Parser
 
-[
-  ![npm](https://img.shields.io/npm/v/welstory-menu-pdf-parser)
-  ![NPM](https://img.shields.io/npm/l/welstory-menu-pdf-parser)
-](https://www.npmjs.com/package/welstory-menu-pdf-parser)
+[![npm](https://img.shields.io/npm/v/welstory-menu-pdf-parser)][npm-url]
+[![NPM](https://img.shields.io/npm/l/welstory-menu-pdf-parser)][npm-url]
 
 삼성 웰스토리 구내식당 영양사님께서 매주 메일로 보내주시는 메뉴 PDF 파일에서 메뉴 정보를 식사, 날짜별로 구분하여 구글 캘린더 등에 등록하여 사용하기 위한 목적으로 만들어진 모듈 입니다.
 
@@ -60,3 +58,4 @@ const file = fs.readFileSync('/path/to/menu.pdf');
 pdf2Json.parseBuffer(file);
 ```
 
+[npm-url]: https://www.npmjs.com/package/welstory-menu-pdf-parser
