@@ -1,5 +1,10 @@
 # 웰스토리 메뉴 PDF Parser
 
+[
+  ![npm](https://img.shields.io/npm/v/welstory-menu-pdf-parser)
+  ![NPM](https://img.shields.io/npm/l/welstory-menu-pdf-parser)
+](https://www.npmjs.com/package/welstory-menu-pdf-parser)
+
 삼성 웰스토리 구내식당 영양사님께서 매주 메일로 보내주시는 메뉴 PDF 파일에서 메뉴 정보를 식사, 날짜별로 구분하여 구글 캘린더 등에 등록하여 사용하기 위한 목적으로 만들어진 모듈 입니다.
 
 현재 [와디즈](https://www.wadiz.kr)가 입주되어 있는 판교디지털센터(PDC) 구내식당의 매뉴를 [잔디(JANDI)](https://www.jandi.com/)의 Webhook을 활용하여 알림을 발송하는데 사용되고 있습니다.
@@ -14,7 +19,7 @@
 # Yarn
 yarn add welstory-menu-pdf-parser
 
-# NPM
+# npm
 npm install welstory-menu-pdf-parser
 ```
 
