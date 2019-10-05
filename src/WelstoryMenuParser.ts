@@ -8,7 +8,7 @@ import {
 } from './utils';
 import {
   MenuCell, MenuDate, MenuMeal, MenuCorner,
-  MenuText, MenuData, MenuMealData
+  MenuText, MenuData, MenuMealData,
 } from './types/menu';
 
 export { MenuData, MenuMealData };
@@ -16,7 +16,7 @@ export { MenuData, MenuMealData };
 /**
  * Welstory 구내식당 메뉴 Parser
  */
-export default class WelstoryMenuParser {
+export class WelstoryMenuParser {
   private cells: MenuCell[] = [];
 
   private date: MenuDate[] = [];
@@ -64,7 +64,7 @@ export default class WelstoryMenuParser {
     const {
       x: firstLeft,
       w: firstWidth,
-      column: meals
+      column: meals,
     } = firstColumn.shift();
     const firstColumnLines = this.verticalLines.reduce((arr, o) => {
       if (o.x - firstWidth <= firstLeft) {
@@ -93,7 +93,7 @@ export default class WelstoryMenuParser {
       this.corners.push({
         x, y,
         meal: nearMeal,
-        text
+        text,
       });
     });
 
@@ -108,7 +108,7 @@ export default class WelstoryMenuParser {
             y,
             w,
             h,
-            texts
+            texts,
           });
         });
       }
@@ -187,3 +187,5 @@ export default class WelstoryMenuParser {
     });
   }
 }
+
+export default WelstoryMenuParser;

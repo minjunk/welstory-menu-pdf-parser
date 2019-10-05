@@ -1,4 +1,4 @@
-import PDFParser, { PDFDataReady } from 'pdf2json';
+import { default as PDFParser, PDFDataReady } from 'pdf2json';
 import { get } from 'lodash';
 import WelstoryMenuParser, { MenuData, MenuMealData } from './WelstoryMenuParser';
 

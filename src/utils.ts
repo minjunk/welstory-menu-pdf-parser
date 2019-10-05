@@ -5,11 +5,11 @@ import {
 } from 'lodash';
 import urldecode from 'urldecode';
 import {
-  LINE_TYPE, MENU_REGEXP
+  LINE_TYPE, MENU_REGEXP,
 } from './constants';
 import {
   MenuDate, MenuMeal, MenuCorner, MenuText,
-  MenuCellText, LineDirection
+  MenuCellText, LineDirection,
 } from './types/menu';
 
 export function nonFix(n: number): number {
@@ -27,7 +27,7 @@ export function inArea(
   texts: MenuText[],
   start: PDFPagesFill,
   end: PDFPagesFill,
-  direction: LineDirection
+  direction: LineDirection,
 ): MenuText[] {
   return texts.filter(o => {
     const value = nonFix(o[direction]);
@@ -47,7 +47,7 @@ type NearCells = MenuMeal | MenuDate | MenuCorner;
  */
 export function getNearCell(
   collection: NearCells[],
-  condition: (condition: NearCells) => boolean
+  condition: (condition: NearCells) => boolean,
 ): NearCells {
   return collection.reduce((previousValue, value) => {
     if (condition(value)) {
@@ -66,7 +66,7 @@ export function getNearCell(
 export function splitText(
   lines: PDFPagesFills,
   texts: MenuText[],
-  type: LINE_TYPE = LINE_TYPE.BOX
+  type: LINE_TYPE = LINE_TYPE.BOX,
 ): MenuCellText[] {
   const direction = type === LINE_TYPE.COLUMN ? 'x' : 'y';
   const childrenKey = type === LINE_TYPE.COLUMN ? 'column' : 'texts';
