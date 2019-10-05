@@ -13,6 +13,9 @@ import {
 
 export { MenuData, MenuMealData };
 
+/**
+ * Welstory 구내식당 메뉴 Parser
+ */
 export default class WelstoryMenuParser {
   private cells: MenuCell[] = [];
 
@@ -49,12 +52,15 @@ export default class WelstoryMenuParser {
     this.parseMenu();
   }
 
+  /**
+   * 메뉴를 파싱하기 이전에 테이블의 셀별로 데이터를 구분
+   */
   private parseTable(): void {
     const hLines = this.horizonLines;
     const firstColumn = splitText(hLines.slice(0, 2), this.texts, LINE_TYPE.COLUMN);
     const horizon = splitText(hLines.slice(1), this.texts, LINE_TYPE.COLUMN);
 
-    // 끼니
+    // 식사
     const {
       x: firstLeft,
       w: firstWidth,
@@ -142,6 +148,10 @@ export default class WelstoryMenuParser {
     });
   }
 
+  /**
+   * 기본 데이터 세트
+   * @param date 해당 날짜만 필터링
+   */
   getData(date?: Date): MenuData[] {
     if (date) {
       return this.menus.filter(o => {
@@ -151,6 +161,9 @@ export default class WelstoryMenuParser {
     return this.menus;
   }
 
+  /**
+   * 식사별로 구분되어 있는 데이터 세트 (구글 캘린더에 등록하기 위한 용도)
+   */
   getMeals(): MenuMealData[] {
     const group = Object.values(groupBy(this.menus, 'startDateTime')) as Array<MenuData[]>;
     return group.map(meals => {
