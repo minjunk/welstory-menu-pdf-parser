@@ -1,8 +1,13 @@
-name: Node.js Package
+name: Node.js Package Build
 
 on:
-  release:
-    types: [created, published]
+  push:
+    branches:
+    - master
+    - release/*
+  pull_request:
+    branches:
+    - master
 
 jobs:
   publish-npm:
@@ -14,7 +19,8 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: yarn install
-      - run: yarn publish --non-interaction
+      - run: yarn lint
+      - run: yarn build
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
