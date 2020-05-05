@@ -31,6 +31,6 @@ module.exports = {
       rules: {
         'no-dupe-class-members': 'off',
       }
-    }
+    },
   ],
 };

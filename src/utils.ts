@@ -35,25 +35,20 @@ export function inArea(
 }
 
 /**
- * `getNearCell` 함수에서 사용되는 타입 세트
- */
-type NearCells = MenuMeal | MenuDate | MenuCorner;
-
-/**
  * 입력된 컬렉션에서 조건에 해당하는 가장 가까운 셀을 찾음
  * @param collection 가까운 셀을 찾기위한 목록
  * @param condition 조건
  */
-export function getNearCell(
-  collection: NearCells[],
-  condition: (condition: NearCells) => boolean,
-): NearCells {
+export function getNearCell<T = MenuMeal | MenuDate | MenuCorner>(
+  collection: T[],
+  condition: (condition: T) => boolean,
+): T {
   return collection.reduce((previousValue, value) => {
     if (condition(value)) {
       return value;
     }
     return previousValue;
-  })
+  }, null);
 }
 
 /**

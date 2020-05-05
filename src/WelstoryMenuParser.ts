@@ -67,7 +67,7 @@ export class WelstoryMenuParser {
       column: meals,
     } = firstColumn.shift();
     const firstColumnLines = this.verticalLines.reduce((arr, o) => {
-      if (o.x - firstWidth <= firstLeft) {
+      if (Math.round(o.x - firstWidth) <= firstLeft) {
         return arr.concat(o);
       }
       return arr;
@@ -89,7 +89,7 @@ export class WelstoryMenuParser {
     const cornersRow = splitText(this.verticalLines, corners, LINE_TYPE.BOX);
     cornersRow.forEach(({ x, y, texts }) => {
       const text = parseText(texts).join('');
-      const nearMeal = getNearCell(this.meals, (o) => o.y <= y) as MenuMeal;
+      const nearMeal = getNearCell(this.meals, (o) => o.y <= y);
       this.corners.push({
         x, y,
         meal: nearMeal,
@@ -129,8 +129,8 @@ export class WelstoryMenuParser {
         // 날짜
         this.date.push({ x, y, value: date });
       } else {
-        const { value: menuDate } = getNearCell(this.date, o => o.x <= x) as MenuDate;
-        const corner = getNearCell(this.corners, o => o.y <= y) as MenuCorner;
+        const { value: menuDate } = getNearCell(this.date, o => o.x <= x);
+        const corner = getNearCell(this.corners, o => o.y <= y);
         const { startTime, endTime } = corner.meal;
         const startDateTime = setDateTime(menuDate, startTime);
         const endDateTime = setDateTime(menuDate, endTime);
@@ -165,7 +165,7 @@ export class WelstoryMenuParser {
    * 식사별로 구분되어 있는 데이터 세트 (구글 캘린더에 등록하기 위한 용도)
    */
   getMeals(): MenuMealData[] {
-    const group = Object.values(groupBy(this.menus, 'startDateTime')) as Array<MenuData[]>;
+    const group = Object.values(groupBy(this.menus, 'startDateTime'));
     return group.map(meals => {
       const mealName = meals[0].meal.text;
       const cornerName = meals.map(o => {
@@ -183,7 +183,7 @@ export class WelstoryMenuParser {
         meals,
         startDateTime: meals[0].startDateTime,
         endDateTime: meals[0].endDateTime,
-      };
+      } as MenuMealData;
     });
   }
 }
