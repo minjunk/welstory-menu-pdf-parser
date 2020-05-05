@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src", "pdf2json.d.ts"],
+  "compilerOptions": {
+    "baseUrl": "src"
+  }
+}

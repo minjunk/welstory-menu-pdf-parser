@@ -1,4 +1,5 @@
 {
+  "allowJs": true,
   "compilerOptions": {
     "module": "commonjs",
     "sourceMap": true,
@@ -10,11 +11,19 @@
     "allowSyntheticDefaultImports": false,
     "target": "es6",
     "outDir": "./dist",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "typeRoots": [
+      "./typings"
+    ],
+    "types": [
+      "node"
+    ]
   },
   "include": [
-    "src/**/*.ts",
-    "scripts/**/*.ts"
+    "./src/**/*.ts",
+    "./scripts/**/*.ts",
+    "./test/**/*.ts",
+    "./pdf2json.d.ts"
   ],
   "exclude": [
     "node_modules"
